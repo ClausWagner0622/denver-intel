@@ -1362,6 +1362,179 @@ input[type=range]::-webkit-slider-thumb {
   0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
   40% { transform: translateY(-6px); opacity: 1; }
 }
+/* ===== FUTURE LAYER ===== */
+.timeline-block {
+  border-left: 2px solid var(--border2);
+  margin-left: 20px;
+  padding-left: 28px;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.timeline-event {
+  position: relative;
+  margin-bottom: 32px;
+  transition: opacity 0.3s;
+}
+
+.timeline-event.hidden { display: none; }
+
+.timeline-dot {
+  position: absolute;
+  left: -37px;
+  top: 6px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+
+.timeline-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.timeline-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.timeline-body {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 760px;
+  margin-bottom: 12px;
+}
+
+.timeline-body strong { color: var(--text); }
+
+.timeline-impact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.impact-tag {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.impact-up { color: var(--accent3); border-color: rgba(139,196,160,0.3); background: rgba(139,196,160,0.08); }
+.impact-down { color: var(--danger); border-color: rgba(212,117,106,0.3); background: rgba(212,117,106,0.08); }
+.impact-neutral { color: var(--accent2); border-color: rgba(126,184,212,0.3); background: rgba(126,184,212,0.08); }
+
+/* GEM CARDS */
+.gems-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .gems-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 500px) {
+  .gems-grid { grid-template-columns: 1fr; }
+}
+
+.gem-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gem-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gem-color, var(--accent));
+}
+
+.gem-emoji {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.gem-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.gem-horizon {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+}
+
+.gem-thesis {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.gem-upside {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--accent3);
+}
+
+/* SCENARIO TABLE */
+.scenario-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scenario-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.scenario-table td {
+  padding: 12px 14px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.scenario-table tr:hover td { background: var(--surface2); }
+
+.outlook-pill {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
 </style>
 </head>
 <body>
@@ -1406,6 +1579,7 @@ input[type=range]::-webkit-slider-thumb {
     <button class="tab-btn" onclick="showPanel('tiers')"><span class="tab-number">02</span> Market Tiers</button>
     <button class="tab-btn" onclick="showPanel('ai')"><span class="tab-number">03</span> AI Wealth Map</button>
     <button class="tab-btn" onclick="showPanel('feasibility')"><span class="tab-number">04</span> Build or Buy</button>
+    <button class="tab-btn" onclick="showPanel('future')"><span class="tab-number">05</span> Future Layer</button>
   </div>
 
   <!-- ===== PANEL 1: ZONE FINDER ===== -->
@@ -1760,6 +1934,35 @@ input[type=range]::-webkit-slider-thumb {
     </div>
   </div>
 
+  <!-- ===== PANEL 5: FUTURE LAYER ===== -->
+  <div id="panel-future" class="panel">
+    <div class="section-label">2030 – 2045 Demand Forecast</div>
+    <div class="section-title">The Future Layer</div>
+    <div class="section-desc">Where mobility disruption, demographics, climate risk and AI reshape which Denver zones will be hidden gems — and which will be stranded assets. Today's pricing doesn't reflect these forces yet.</div>
+
+    <!-- SCENARIO FILTER -->
+    <div class="budget-filter" style="margin-bottom:32px">
+      <div class="budget-label">View Scenario:</div>
+      <div class="budget-options">
+        <button class="budget-opt active" id="sc-all" onclick="setScenario(this,'all')">All Signals</button>
+        <button class="budget-opt" id="sc-mobility" onclick="setScenario(this,'mobility')">🚗 Mobility</button>
+        <button class="budget-opt" id="sc-evtol" onclick="setScenario(this,'evtol')">🚁 eVTOL</button>
+        <button class="budget-opt" id="sc-demo" onclick="setScenario(this,'demo')">👥 Demographics</button>
+        <button class="budget-opt" id="sc-climate" onclick="setScenario(this,'climate')">🌡 Climate</button>
+        <button class="budget-opt" id="sc-school" onclick="setScenario(this,'school')">🏫 Schools</button>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div id="future-timeline"></div>
+
+    <!-- HIDDEN GEMS -->
+    <div id="future-gems" style="margin-top:40px"></div>
+
+    <!-- SCENARIO TABLE -->
+    <div id="future-table" style="margin-top:40px"></div>
+  </div>
+
   <!-- VISTA CHAT (all panels) -->
   <div class="vista-section">
     <div class="vista-header">
@@ -1776,6 +1979,8 @@ input[type=range]::-webkit-slider-thumb {
       <button class="qq-btn" onclick="askQuick('What is the ceiling for a luxury home in Sunnyside?')">Sunnyside price ceiling?</button>
       <button class="qq-btn" onclick="askQuick('How does the two-speed market affect my selling strategy?')">Selling strategy in bifurcated market?</button>
       <button class="qq-btn" onclick="askQuick('Where are AI wealth buyers concentrating in Denver?')">Where is AI wealth going?</button>
+      <button class="qq-btn" onclick="askQuick('What happens to Foothills real estate when autonomous vehicles arrive?')">AV impact on Foothills?</button>
+      <button class="qq-btn" onclick="askQuick('Is Denver a climate safe haven for real estate?')">Denver climate premium?</button>
     </div>
 
     <div class="chat-window">
@@ -2368,6 +2573,7 @@ function showPanel(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
   event.target.classList.add('active');
+  if (name === 'future') renderFutureLayer();
 }
 
 // ===== VISTA CHAT =====
@@ -2384,7 +2590,11 @@ const VISTA_KB = {
   'selling': 'In today\'s bifurcated market, selling strategy depends entirely on which tier you\'re in. Tier 1 ($1.5M+): market to cash buyers directly, use exclusive networks, price to the ceiling and wait — the right buyer may take 60–200 days but exists. Tier 2 ($500K–$1.5M): price aggressively from day one, days on market directly kills value, avoid stale listings. The middle-market buyer is fragile and fearful. Tier 3: institutional buyer market, different playbook entirely.',
   'build': 'Construction costs in Denver are running $380–$720/sqft depending on zone and finish level, before soft costs and land. The key question is whether your resale ceiling exceeds total project cost with sufficient margin. Use the Build or Buy calculator in panel 04 to run your specific numbers. Cherry Creek North is the only zone with reliable $700+/sqft resale support. Most other zones face margin compression at current construction costs.',
   'investment': 'The best investment framework for Denver right now: (1) Tier 1 properties in AI demand zones (Cherry Creek, LoHi) will outperform but require patience and deep pockets. (2) Sunnyside and RiNo offer the best entry-point upside if you have a 7–10 year horizon. (3) Middle-market properties in rate-sensitive neighborhoods are the most dangerous — thin buyer pools, long DOM, AI job anxiety suppressing demand. (4) Foothills is a speculative AV corridor play for patient investors.',
-  'default': 'I can analyze any Denver neighborhood, development project, or market dynamic you\'re considering. Ask me about specific neighborhoods (Cherry Creek, LoHi, Sunnyside, RiNo, Wash Park, Foothills), the AI wealth effect, market tiers, building feasibility, or selling strategy in today\'s bifurcated market.'
+  'future': 'The Future Layer tracks five disruption forces reshaping Denver real estate by 2045: (1) Autonomous vehicles — AV saturation by 2031 eliminates the commute penalty for Foothills zones, unlocking a major repricing cycle. (2) eVTOL vertiports — Joby and Archer target Denver by 2030, with Cherry Creek and Foothills corridors as likely nodes. (3) The Great Wealth Transfer — $84 trillion shifting to Millennials/Gen X, heavily favoring walkable lifestyle neighborhoods. (4) Climate migration — Denver\'s altitude and climate becomes a national premium as Phoenix, Vegas, and coastal metros face devaluation. (5) AI disrupts school premiums — AI tutoring erodes the zip code advantage baked into Hilltop and Cherry Hills pricing over 10–20 years.',
+  'av': 'Autonomous vehicle adoption is the biggest single repricing event coming to Denver real estate. By 2028–2031, cost per mile drops below $0.40 — cheaper than car ownership. The I-70 commute penalty for Foothills zones largely disappears. Genesee, Riva Chase, Lookout Mountain and Evergreen are the primary beneficiaries. Research models suggest viable residential radii expand 30–68% with AV adoption. This is a 5–8 year thesis from today.',
+  'evtol': 'eVTOL (electric vertical takeoff and landing) vertiports are coming to Denver. Joby Aviation and Archer are targeting commercial operations by 2029–2033. A vertiport at or near Cherry Creek and a Foothills corridor node would make a 15-minute air connection from Evergreen to downtown Denver a reality. Properties within walking distance of vertiport nodes will command significant premiums.',
+  'climate': 'Denver is a climate winner relative to most US metros. At 5,280ft, summers are cooler than Phoenix or LA, flood risk is lower than coastal cities, and there\'s no hurricane exposure. Insurance non-renewal rates are already 80% higher in high-risk zip codes nationally. As climate risk gets priced into mortgages and insurance, Denver\'s climate premium will strengthen. Key risk: Colorado water scarcity. Key opportunity: climate migration from Southwest metros.',
+  'default': 'I can analyze any Denver neighborhood, development project, or market dynamic you\'re considering. Ask me about specific neighborhoods (Cherry Creek, LoHi, Sunnyside, RiNo, Wash Park, Foothills), the AI wealth effect, market tiers, building feasibility, selling strategy, or future disruption forces like autonomous vehicles, eVTOL, climate migration, and the wealth transfer.'
 };
 
 function getVistaResponse(msg) {
@@ -2392,6 +2602,10 @@ function getVistaResponse(msg) {
   for (const [key, resp] of Object.entries(VISTA_KB)) {
     if (m.includes(key)) return resp;
   }
+  if (m.includes('autonomous') || m.includes('self-driving') || m.includes('robo')) return VISTA_KB['av'];
+  if (m.includes('evtol') || m.includes('vertiport') || m.includes('air taxi') || m.includes('flying')) return VISTA_KB['evtol'];
+  if (m.includes('climate') || m.includes('weather') || m.includes('insurance') || m.includes('flood')) return VISTA_KB['climate'];
+  if (m.includes('future') || m.includes('2030') || m.includes('2035') || m.includes('forecast')) return VISTA_KB['future'];
   if (m.includes('best') && (m.includes('buy') || m.includes('invest'))) return VISTA_KB['investment'];
   if (m.includes('sell')) return VISTA_KB['selling'];
   if (m.includes('build') || m.includes('construct') || m.includes('develop')) return VISTA_KB['build'];
@@ -2436,6 +2650,279 @@ function addTyping() {
   container.appendChild(div);
   container.scrollTop = container.scrollHeight;
   return div;
+}
+
+// ===== FUTURE LAYER DATA =====
+
+const TIMELINE_EVENTS = [
+  {
+    year: '2026–2028',
+    category: 'mobility',
+    color: '#7eb8d4',
+    title: 'Robo-Taxi Early Deployment',
+    body: 'Waymo expands Denver operations. Tesla FSD subscription reaches critical mass. Cost per mile begins dropping below $1.20 — still above car ownership but the psychological shift begins. <strong>Early adopters in car-dependent zones gain partial commute relief.</strong> Foothills and outer suburban zones begin repricing speculation.',
+    impacts: [
+      { label: '↑ Foothills early buzz', cls: 'impact-up' },
+      { label: '↑ AV-ready corridors', cls: 'impact-up' },
+      { label: '→ Urban zones unaffected', cls: 'impact-neutral' }
+    ]
+  },
+  {
+    year: '2028–2031',
+    category: 'mobility',
+    color: '#7eb8d4',
+    title: 'Robo-Taxi Saturation',
+    body: 'Waymo, Tesla FSD, and Zoox deploy at scale in Denver metro. <strong>Cost per mile drops below $0.40 — cheaper than car ownership for most households.</strong> The commute burden collapses for suburban zones. I-70 congestion becomes largely irrelevant for households willing to ride. Research models suggest viable residential radii expand 30–68%.',
+    impacts: [
+      { label: '↑↑ Foothills repricing begins', cls: 'impact-up' },
+      { label: '↑ Golden corridor premium', cls: 'impact-up' },
+      { label: '↓ Parking land value drops', cls: 'impact-down' },
+      { label: '→ LoHi / Cherry Creek stable', cls: 'impact-neutral' }
+    ]
+  },
+  {
+    year: '2029–2033',
+    category: 'evtol',
+    color: '#c8a96e',
+    title: 'eVTOL Vertiport Infrastructure',
+    body: 'Joby Aviation and Archer begin commercial operations out of Denver International. <strong>Vertiport infrastructure targets high-density nodes — Cherry Creek, DTC, and potentially a Foothills corridor stop.</strong> A 15-minute air connection from Evergreen-area to downtown Denver changes the math on mountain living entirely. Early vertiport-adjacent properties begin commanding premium.',
+    impacts: [
+      { label: '↑↑ Vertiport-adjacent zones', cls: 'impact-up' },
+      { label: '↑ Mountain view properties', cls: 'impact-up' },
+      { label: '↑ Cherry Creek node', cls: 'impact-up' },
+      { label: '↓ Mid-distance suburbs', cls: 'impact-down' }
+    ]
+  },
+  {
+    year: '2030–2035',
+    category: 'demo',
+    color: '#8bc4a0',
+    title: 'The Great Wealth Transfer Peaks',
+    body: '<strong>$84 trillion in wealth transfers from Boomers to Gen X and Millennials</strong> — the largest intergenerational transfer in history. Denver receives an outsized share as a top migration destination. This cohort is more likely to pay cash, prioritize lifestyle over commute, and target design-forward properties in walkable neighborhoods. Expect Cherry Creek, LoHi, and Wash Park to be primary beneficiaries.',
+    impacts: [
+      { label: '↑↑ Cherry Creek / LoHi', cls: 'impact-up' },
+      { label: '↑ Wash Park family market', cls: 'impact-up' },
+      { label: '↑ Mountain lifestyle zones', cls: 'impact-up' },
+      { label: '↓ Rate-sensitive suburbs', cls: 'impact-down' }
+    ]
+  },
+  {
+    year: '2032–2037',
+    category: 'mobility',
+    color: '#7eb8d4',
+    title: 'Commute-Distance Decoupling',
+    body: 'Productive travel time in autonomous vehicles means a 45-minute commute is no longer a penalty — it\'s work time. <strong>The traditional 20-minute commute radius that defines urban premium pricing begins to expand.</strong> Foothills zones with mountain views but historically penalized by commute time begin a multi-year repricing cycle. Genesee, Riva Chase, and Lookout Mountain emerge as the new "close-in" luxury.',
+    impacts: [
+      { label: '↑↑ Foothills major repricing', cls: 'impact-up' },
+      { label: '↑ Evergreen / Morrison', cls: 'impact-up' },
+      { label: '→ LoHi / Cherry Creek hold', cls: 'impact-neutral' },
+      { label: '↓ Mid-suburbs lose edge', cls: 'impact-down' }
+    ]
+  },
+  {
+    year: '2030–2040',
+    category: 'climate',
+    color: '#d4a96a',
+    title: 'Climate Risk Repricing',
+    body: '<strong>Insurance non-renewal rates are already 80% higher in high-risk zip codes.</strong> As climate modeling becomes standard in mortgage underwriting, flood-prone, wildfire-adjacent, and extreme-heat zones face structural devaluation. Denver\'s semi-arid climate and 5,280ft elevation becomes a genuine premium — cooler summers than Phoenix or LA, lower flood risk than coastal metros, no hurricane exposure. Colorado\'s water scarcity remains the key risk variable.',
+    impacts: [
+      { label: '↑↑ Denver altitude premium', cls: 'impact-up' },
+      { label: '↑ Foothills (cooler temps)', cls: 'impact-up' },
+      { label: '↓ Flood-adjacent zones', cls: 'impact-down' },
+      { label: '↓ Wildfire-adjacent foothills', cls: 'impact-down' },
+      { label: '↓ Southwest / Phoenix exodus', cls: 'impact-down' }
+    ]
+  },
+  {
+    year: '2033–2040',
+    category: 'school',
+    color: '#c47ab8',
+    title: 'AI Disrupts School District Premiums',
+    body: '<strong>AI tutoring platforms (Khan Academy AI, custom GPT tutors) begin delivering elite-quality education independent of zip code.</strong> The 10–15% school district premium baked into Washington Park, Hilltop, and Cherry Hills pricing begins to erode as the perceived advantage of "good school district" narrows. Simultaneously, homeschool and micro-school movements accelerate. This is a slow-moving force — expect 10–20 years to fully reprice.',
+    impacts: [
+      { label: '↓ School district premium erodes', cls: 'impact-down' },
+      { label: '↓ Hilltop / Cherry Hills mild risk', cls: 'impact-down' },
+      { label: '↑ Sunnyside / LoHi (previously penalized)', cls: 'impact-up' },
+      { label: '→ Long-term trend, not immediate', cls: 'impact-neutral' }
+    ]
+  },
+  {
+    year: '2038–2045',
+    category: 'mobility',
+    color: '#7eb8d4',
+    title: 'Parking Land Reclamation',
+    body: '<strong>Denver\'s estimated 75,000+ surface parking spaces begin converting to residential, park, and mixed-use.</strong> Urban core density rises dramatically. The contrast between dense urban living and mountain/nature escape sharpens — the "view + nature" premium in foothills zones strengthens as urban Denver becomes denser and noisier. Properties with genuine mountain views become increasingly scarce relative to the urban population.',
+    impacts: [
+      { label: '↑↑ View properties long-term', cls: 'impact-up' },
+      { label: '↑ Urban park-adjacent', cls: 'impact-up' },
+      { label: '↑ Foothills contrast premium', cls: 'impact-up' },
+      { label: '→ Cherry Creek adapts well', cls: 'impact-neutral' }
+    ]
+  }
+];
+
+const HIDDEN_GEMS = [
+  {
+    emoji: '⛰',
+    name: 'Genesee / Riva Chase',
+    horizon: '2031–2037 play',
+    color: '#c8a96e',
+    thesis: 'Today penalized by I-70 commute. AV saturation by 2031 eliminates that penalty. Best mountain views per dollar in the metro. Vertiport adjacency speculation adds optionality.',
+    upside: 'Est. +35–55% repricing on AV adoption'
+  },
+  {
+    emoji: '🌉',
+    name: 'Sunnyside (North)',
+    horizon: '2028–2033 play',
+    color: '#8bc4a0',
+    thesis: 'G-Line RTD + LoHi spillover + lower entry price. Designer homes today face thin buyer pools. By 2030 the neighborhood\'s trajectory will have attracted the organic density that supports $2M+ pricing.',
+    upside: 'Est. +40–60% from current ceiling'
+  },
+  {
+    emoji: '🏭',
+    name: 'RiNo North Expansion',
+    horizon: '2026–2030 play',
+    color: '#c47ab8',
+    thesis: 'RiNo\'s creative-tech identity is expanding northward. As AI-economy wealth concentrates in Denver, design-forward lofts and industrial conversion properties in this corridor are the nearest equivalent to Brooklyn in New York.',
+    upside: 'Fastest current appreciation, momentum play'
+  },
+  {
+    emoji: '🌲',
+    name: 'Lookout Mountain / Morrison',
+    horizon: '2030–2038 play',
+    color: '#7eb8d4',
+    thesis: 'Dramatic views, historic charm, currently car-dependent. AV + eVTOL corridor unlocks massive value. Climate premium for elevation. Currently priced as a commuter penalty zone — the thesis inverts by 2032.',
+    upside: 'Deep value if AV thesis plays out'
+  },
+  {
+    emoji: '🏙',
+    name: 'Jefferson Park',
+    horizon: '2026–2029 play',
+    color: '#d4a96a',
+    thesis: 'Sloan\'s Lake adjacency, Ball Arena urban district spillover, lower price than LoHi. Currently transitional — the density investment around Ball Arena creates a Coors Field effect. Best near-term momentum play in west Denver.',
+    upside: 'Near-term catalyst, lower risk'
+  },
+  {
+    emoji: '🌡',
+    name: 'Denver (Metro-wide)',
+    horizon: 'Climate premium 2028+',
+    color: '#8bc4a0',
+    thesis: 'As Phoenix, Vegas, and LA face climate devaluation from extreme heat, wildfire smoke, and water scarcity, Denver\'s 5,280ft elevation, 4-season climate, and mountain access becomes a national premium. Climate migration is already beginning.',
+    upside: 'Structural demand floor from climate refugees'
+  }
+];
+
+const SCENARIO_TABLE_DATA = [
+  { zone: 'Cherry Creek North',  mob2030: '↑ Strong', evtol: '↑↑ Vertiport',  demo: '↑↑ Primary',  climate: '↑ Safe',    school: '→ Stable',   outlook: 'Dominant', cls: 'background:rgba(200,169,110,0.12);color:var(--tier1);border:1px solid rgba(200,169,110,0.25)' },
+  { zone: 'LoHi / Highland',     mob2030: '→ Neutral', evtol: '↑ Adjacent',   demo: '↑ Strong',    climate: '↑ Safe',    school: '↑ Improves', outlook: 'Strong',   cls: 'background:rgba(139,196,160,0.12);color:var(--accent3);border:1px solid rgba(139,196,160,0.25)' },
+  { zone: 'Foothills Corridor',  mob2030: '↑↑ Major',  evtol: '↑↑ Direct',   demo: '↑ Wealth',    climate: '↑ Cooler',  school: '→ AI equal', outlook: 'Best Upside', cls: 'background:rgba(200,169,110,0.12);color:var(--tier1);border:1px solid rgba(200,169,110,0.25)' },
+  { zone: 'Sunnyside',           mob2030: '↑ RTD',     evtol: '→ Far',        demo: '↑ Spillover', climate: '↑ Safe',    school: '↑ AI helps', outlook: 'Rising',   cls: 'background:rgba(126,184,212,0.12);color:var(--tier2);border:1px solid rgba(126,184,212,0.25)' },
+  { zone: 'Washington Park',     mob2030: '→ Neutral', evtol: '→ Neutral',    demo: '↑↑ Transfer', climate: '↑ Safe',    school: '↓ Erodes',   outlook: 'Stable',   cls: 'background:rgba(126,184,212,0.12);color:var(--tier2);border:1px solid rgba(126,184,212,0.25)' },
+  { zone: 'RiNo / Five Points',  mob2030: '↑ Transit', evtol: '→ Neutral',    demo: '↑ Tech youth',climate: '↑ Safe',    school: '↑ AI helps', outlook: 'Strong',   cls: 'background:rgba(139,196,160,0.12);color:var(--accent3);border:1px solid rgba(139,196,160,0.25)' },
+  { zone: 'Hilltop / Crestmoor', mob2030: '→ Neutral', evtol: '→ Neutral',    demo: '↑ Old money', climate: '↑ Safe',    school: '↓ Erodes',   outlook: 'Stable',   cls: 'background:rgba(126,184,212,0.12);color:var(--tier2);border:1px solid rgba(126,184,212,0.25)' },
+  { zone: 'Outer Suburbs',       mob2030: '↑ Some',    evtol: '↓ Far',        demo: '↓ Flight',    climate: '→ Neutral', school: '→ AI equal', outlook: 'At Risk',  cls: 'background:rgba(212,117,106,0.12);color:var(--danger);border:1px solid rgba(212,117,106,0.25)' }
+];
+
+// ===== FUTURE LAYER RENDER =====
+let activeScenario = 'all';
+
+function setScenario(btn, val) {
+  document.querySelectorAll('[id^="sc-"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeScenario = val;
+  renderFutureLayer();
+}
+
+function renderFutureLayer() {
+  renderTimeline();
+  renderGems();
+  renderScenarioTable();
+}
+
+function renderTimeline() {
+  const container = document.getElementById('future-timeline');
+  if (!container) return;
+
+  const filtered = activeScenario === 'all'
+    ? TIMELINE_EVENTS
+    : TIMELINE_EVENTS.filter(e => e.category === activeScenario);
+
+  container.innerHTML = `
+    <div class="section-label">Timeline</div>
+    <div class="section-title" style="font-size:22px;margin-bottom:24px">Disruption Sequence</div>
+    <div class="timeline-block">
+      ${filtered.map(ev => `
+        <div class="timeline-event">
+          <div class="timeline-dot" style="background:${ev.color}"></div>
+          <div class="timeline-year">${ev.year}</div>
+          <div class="timeline-title">${ev.title}</div>
+          <div class="timeline-body">${ev.body}</div>
+          <div class="timeline-impact">
+            ${ev.impacts.map(i => `<span class="impact-tag ${i.cls}">${i.label}</span>`).join('')}
+          </div>
+        </div>
+      `).join('')}
+      ${filtered.length === 0 ? '<div style="color:var(--muted);font-size:14px;padding:20px 0">No events for this category.</div>' : ''}
+    </div>
+  `;
+}
+
+function renderGems() {
+  const container = document.getElementById('future-gems');
+  if (!container) return;
+  container.innerHTML = `
+    <div class="section-label">Hidden Gems</div>
+    <div class="section-title" style="font-size:22px;margin-bottom:8px">Today's Overlooked, Tomorrow's Premium</div>
+    <div class="section-desc" style="margin-bottom:24px">Properties and zones that current pricing hasn't yet reflected the coming structural shifts.</div>
+    <div class="gems-grid">
+      ${HIDDEN_GEMS.map(g => `
+        <div class="gem-card" style="--gem-color:${g.color}">
+          <div class="gem-emoji">${g.emoji}</div>
+          <div class="gem-name">${g.name}</div>
+          <div class="gem-horizon">${g.horizon}</div>
+          <div class="gem-thesis">${g.thesis}</div>
+          <div class="gem-upside">${g.upside}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderScenarioTable() {
+  const container = document.getElementById('future-table');
+  if (!container) return;
+  container.innerHTML = `
+    <div class="section-label">Scenario Matrix</div>
+    <div class="section-title" style="font-size:22px;margin-bottom:20px">Zone × Disruption Force</div>
+    <div style="overflow-x:auto">
+      <table class="scenario-table">
+        <thead>
+          <tr>
+            <th>Zone</th>
+            <th>🚗 AV / Mobility</th>
+            <th>🚁 eVTOL</th>
+            <th>👥 Wealth Transfer</th>
+            <th>🌡 Climate</th>
+            <th>🏫 School AI</th>
+            <th>2035 Outlook</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${SCENARIO_TABLE_DATA.map(r => `
+            <tr>
+              <td style="font-weight:700;color:var(--text)">${r.zone}</td>
+              <td style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">${r.mob2030}</td>
+              <td style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">${r.evtol}</td>
+              <td style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">${r.demo}</td>
+              <td style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">${r.climate}</td>
+              <td style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">${r.school}</td>
+              <td><span class="outlook-pill" style="${r.cls}">${r.outlook}</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
 }
 
 // ===== INIT =====
